@@ -1,0 +1,11 @@
+appid: "45d64ecb"
+api_secret: "YjNjNzRlMjM4Nzk0NjBkNTM2YjRlYTlm"
+api_key: "7ad083d3e91d08330bb838f660e6468b"
+
+#用于配置大模型版本，默认“general/generalv2”
+# domain: "general"   # v1.5版本
+domain: "generalv2"    # v2.0版本
+
+#云端环境的服务地址
+# Spark_url: "ws://spark-api.xf-yun.com/v1.1/chat"  # v1.5环境的地址
+Spark_url: "ws://spark-api.xf-yun.com/v2.1/chat"  # v2.0环境的地址
