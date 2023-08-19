@@ -18,6 +18,7 @@
 （想想就激动）
 
 同时，我也上传了自己的 iflytek.yaml 配置文件， token 虽然不多，但可以供大家玩
+
 现在讯飞申请很快，且免费额度不少，大家自己去注册一下就能替换掉我的 APPID 等配置了
 
 ## 使用方法
@@ -31,19 +32,21 @@ git clone https://github.com/Dao1023/ChatBot
 cd ChatBot
 ```
 
-pip
-
-```shell
-pip install xxx
-python main.py
-```
-
-conda（推荐）
+Python（推荐 conda 环境）
 
 ```shell
 conda create -n ChatBot python=3.10
 conda activate ChatBot
-conda install pyaudio xxx xxx xxx
-# pip install xxx xxx xxx
 python main.py
 ```
+
+部分重要的 Python 依赖
+
+```shell
+pip install pyaudio
+pip install pyttsx
+pip install websocker_cilent
+pip install PyYAML
+```
+
+有人反馈依赖问题，我把依赖放到了 doc/requirements.txt 里面，但会存在一些用不到的，仅供参考
