@@ -1,6 +1,5 @@
 from src import iflytek_iat_demo
 from src import SparkDesk_test
-import win32com
 from src import pyttsx3_demo
 from src import iflytek_tts_demo
 
