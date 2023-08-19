@@ -11,7 +11,7 @@ def yaml_read(file_name):
         return data
 
 # 载入参数
-iflytek = yaml_read(r"conf\iflytek.yaml")
+iflytek = yaml_read(r"conf/iflytek.yaml")
 appid = iflytek["appid"]
 api_key = iflytek["api_key"]
 api_secret = iflytek["api_secret"]

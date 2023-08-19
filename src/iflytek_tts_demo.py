@@ -17,7 +17,7 @@ import yaml
 
 class Ws_Param(object):
     # 初始化
-    def __init__(self, Text="你好，世界", file_name=r"conf\iflytek.yaml"):
+    def __init__(self, Text="你好，世界", file_name=r"conf/iflytek.yaml"):
         with open(file_name, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f)
             self.APPID = data["appid"]
