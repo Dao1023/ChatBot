@@ -9,3 +9,7 @@ domain: "generalv2"    # v2.0版本
 #云端环境的服务地址
 # Spark_url: "ws://spark-api.xf-yun.com/v1.1/chat"  # v1.5环境的地址
 Spark_url: "ws://spark-api.xf-yun.com/v2.1/chat"  # v2.0环境的地址
+
+# 本地参数
+iat_pcm: "data/iat.pcm"
+tts_pcm: "data/tts.pcm"

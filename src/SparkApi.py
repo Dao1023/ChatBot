@@ -10,8 +10,9 @@ from datetime import datetime
 from time import mktime
 from urllib.parse import urlencode
 from wsgiref.handlers import format_date_time
-
 import websocket  # 使用websocket_client
+
+
 answer = ""
 
 class Ws_Param(object):
@@ -59,12 +60,14 @@ class Ws_Param(object):
 
 # 收到websocket错误的处理
 def on_error(ws, error):
-    print("### error:", error)
+    # print("### error:", error)
+    pass
 
 
 # 收到websocket关闭的处理
 def on_close(ws,one,two):
-    print(" ")
+    # print(" ")
+    pass
 
 
 # 收到websocket连接建立的处理
