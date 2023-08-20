@@ -1,6 +1,6 @@
-appid: "45d64ecb"
-api_secret: "YjNjNzRlMjM4Nzk0NjBkNTM2YjRlYTlm"
-api_key: "7ad083d3e91d08330bb838f660e6468b"
+appid: "8b78ee8d"
+api_secret: "MjMxZDVhNzE1OGE2MmU4MmNlNzEwNjYx"
+api_key: "deb208978c5ae4773f02b1f035a0f1b8"
 
 #用于配置大模型版本，默认“general/generalv2”
 # domain: "general"   # v1.5版本

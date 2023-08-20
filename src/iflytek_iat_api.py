@@ -52,7 +52,7 @@ STATUS_LAST_FRAME = 2  # 最后一帧的标识
 
 class Ws_Param(object):
     # 初始化
-    def __init__(self, file_name=r"conf/iflytek.yaml"):
+    def __init__(self, file_name="config/iflytek.yaml"):
         with open(file_name, 'r', encoding='utf-8') as f:
             data = yaml.safe_load(f)
             self.APPID = data["appid"]
