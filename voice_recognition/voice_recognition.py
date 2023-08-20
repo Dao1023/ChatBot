@@ -12,6 +12,7 @@ from datetime import datetime
 from time import mktime
 import _thread as thread
 import pyaudio
+import yaml
 
 STATUS_FIRST_FRAME = 0
 STATUS_CONTINUE_FRAME = 1
@@ -19,12 +20,15 @@ STATUS_LAST_FRAME = 2
 
 
 class SpeechRecognition(object):
-    def __init__(self, APPID, APIKey, APISecret):
-        self.APPID = APPID
-        self.APIKey = APIKey
-        self.APISecret = APISecret
+    def __init__(self, config_file_path):
+        with open(config_file_path, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+            self.APPID = data["appid"]
+            self.APIKey = data["api_key"]
+            self.APISecret = data["api_secret"]
         self.running = False
         self.thread = None
+        self.result = ""
 
         self.CommonArgs = {"app_id": self.APPID}
         self.BusinessArgs = {"domain": "iat", "language": "zh_cn", "accent": "mandarin", "vinfo": 1, "vad_eos": 10000}
@@ -55,24 +59,24 @@ class SpeechRecognition(object):
         url = url + '?' + urlencode(v)
         return url
 
-    def on_message(self, ws, message):
+    # 收到websocket消息的处理
+    def on_message(self, message):
         try:
             code = json.loads(message)["code"]
             sid = json.loads(message)["sid"]
             if code != 0:
                 errMsg = json.loads(message)["message"]
                 print("sid:%s call error:%s code is:%s" % (sid, errMsg, code))
+
             else:
                 data = json.loads(message)["data"]["result"]["ws"]
-                result = ""
+                # print(json.loads(message))
+                # self.result = ""
                 for i in data:
                     for w in i["cw"]:
-                        result += w["w"]
-
-                if result == '。' or result == '.。' or result == ' .。' or result == ' 。':
-                    pass
-                else:
-                    print("翻译结果: %s。" % (result))
+                        self.result += w["w"]
+                # print("sid:%s call success!,data is:%s" % (sid, json.dumps(data, ensure_ascii=False)))
+                # print(self.result)
 
         except Exception as e:
             print("receive msg,but parse exception:", e)
@@ -135,11 +139,13 @@ class SpeechRecognition(object):
         ws.on_open = self.on_open
         ws.run_forever(sslopt={"cert_reqs": ssl.CERT_NONE}, ping_timeout=2)
 
+
     def start_recognition(self):
         if not self.running:
             self.running = True
             self.thread = threading.Thread(target=self.run_recognition)
             self.thread.start()
+            return self.result
 
     def stop_recognition(self):
         if self.running:
@@ -147,16 +153,15 @@ class SpeechRecognition(object):
             if self.thread:
                 self.thread.join()
 
+
+
+
 # 示例用法
 if __name__ == "__main__":
-    wsParam = SpeechRecognition(
-        APPID='8b78ee8d',
-        APIKey='deb208978c5ae4773f02b1f035a0f1b8',
-        APISecret='MjMxZDVhNzE1OGE2MmU4MmNlNzEwNjYx'
-    )
+    wsParam = SpeechRecognition(config_file_path="config/iflytek.yaml")
 
-    a = threading.Thread(target=wsParam.start_recognition)
-    a.start()
-
-    time.sleep(10)  # 运行 10 秒钟
+    result = wsParam.start_recognition()
+    print("result: ", result)
+    time.sleep(5)
     wsParam.stop_recognition()
+    
