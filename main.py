@@ -1,28 +1,24 @@
-from src import iflytek_iat_demo
 from src import SparkDesk_test
-import win32com
-from src import pyttsx3_demo
-from src import iflytek_tts_demo
+import streamlit as st
 
+st.title("Chatbot Interface")
 
-while 1:
-    
-    # 文本输入
-    # qustion = 'hello'
-    # qustion = input("Dao: ")
-    
-    # 音频输入
-    qustion = iflytek_iat_demo.run()
-    print("Dao: ", qustion)
+# 使用streamlit的session_state来存储聊天历史
+if 'chat_history' not in st.session_state:
+    st.session_state.chat_history = []
 
-    # 处理
-    answer = SparkDesk_test.getAnswer(qustion)
-    # answer = "你们好呀"
-    
-    # 文本输出
-    print("SparkDesk: ", answer)
+# 用户输入
+user_input = st.text_input("Your Question:")
+if st.button('Send'):
+    if user_input:
+        # 获取回答
+        answer = SparkDesk_test.getAnswer(user_input)
+        st.session_state.chat_history.append(("You", user_input))
+        st.session_state.chat_history.append(("Bot", answer))
 
-    # 音频输出
-    # win32com.client.Dispatch("SAPI.SpVoice").Speak(answer)
-    # pyttsx3_demo.speak(answer)
-    iflytek_tts_demo.Ws_Param(answer)
+# 显示聊天历史
+for role, message in st.session_state.chat_history:
+    if role == "You":
+        st.write(f"You: {message}")
+    else:
+        st.write(f"Bot: {message}")
