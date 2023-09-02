@@ -28,7 +28,8 @@ git
 ```shell
 git clone https://github.com/Dao1023/ChatBot.git
 cd ChatBot
-git check streamlit
+git checkout streamlit
+
 ```
 
 Python（推荐 conda 环境）
@@ -56,7 +57,7 @@ git
 ```shell
 git clone https://github.com/Dao1023/ChatBot.git
 cd ChatBot
-git check streamlit
+git checkout streamlit
 ```
 
 docker
