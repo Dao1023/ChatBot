@@ -19,7 +19,7 @@ def yaml_read(file_name):
 def run():
     try:
         # 读取配置文件
-        account = yaml_read(r'conf\account.yaml')
+        account = yaml_read(r'conf/account.yaml')
         api_key = account['api_key']
         prompt = input('提问：')
 
