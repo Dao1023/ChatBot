@@ -43,6 +43,7 @@ conda activate ChatBot
 
 ```shell
 pip install -r requirements.txt
+# pip install xxx -i https://mirrors.aliyun.com/pypi/simple 国内需要镜像的用这个
 ```
 
 启动程序
