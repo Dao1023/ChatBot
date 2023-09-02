@@ -32,9 +32,9 @@ class Ws_Param(object):
         date = format_date_time(mktime(now.timetuple()))
 
         # 拼接字符串
-        signature_origin = "host: " + self.host + "\n"
-        signature_origin += "date: " + date + "\n"
-        signature_origin += "GET " + self.path + " HTTP/1.1"
+        signature_origin = f"host: {self.host}\n"
+        signature_origin += f"date: {date}\n"
+        signature_origin += f"GET {self.path} HTTP/1.1"
 
         # 进行hmac-sha256进行加密
         signature_sha = hmac.new(self.APISecret.encode('utf-8'), signature_origin.encode('utf-8'),
@@ -52,10 +52,7 @@ class Ws_Param(object):
             "date": date,
             "host": self.host
         }
-        # 拼接鉴权参数，生成url
-        url = self.Spark_url + '?' + urlencode(v)
-        # 此处打印出建立连接时候的url,参考本demo的时候可取消上方打印的注释，比对相同参数时生成的url与自己代码生成的url是否一致
-        return url
+        return f'{self.Spark_url}?{urlencode(v)}'
 
 
 # 收到websocket错误的处理
@@ -104,26 +101,18 @@ def gen_params(appid, domain,question):
     """
     通过appid和用户的提问来生成请参数
     """
-    data = {
-        "header": {
-            "app_id": appid,
-            "uid": "1234"
-        },
+    return {
+        "header": {"app_id": appid, "uid": "1234"},
         "parameter": {
             "chat": {
                 "domain": domain,
                 "random_threshold": 0.5,
                 "max_tokens": 2048,
-                "auditing": "default"
+                "auditing": "default",
             }
         },
-        "payload": {
-            "message": {
-                "text": question
-            }
-        }
+        "payload": {"message": {"text": question}},
     }
-    return data
 
 
 def main(appid, api_key, api_secret, Spark_url,domain, question):

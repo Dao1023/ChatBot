@@ -7,8 +7,7 @@ text =[]
 
 def yaml_read(file_name):
     with open(file_name, 'r', encoding='utf-8') as f:
-        data = yaml.safe_load(f)
-        return data
+        return yaml.safe_load(f)
 
 # 载入参数
 iflytek = yaml_read(r"conf\iflytek.yaml")
@@ -20,19 +19,12 @@ domain = iflytek["domain"]
 
 
 def getText(role,content):
-    jsoncon = {}
-    jsoncon["role"] = role
-    jsoncon["content"] = content
+    jsoncon = {"role": role, "content": content}
     text.append(jsoncon)
     return text
 
 def getlength(text):
-    length = 0
-    for content in text:
-        temp = content["content"]
-        leng = len(temp)
-        length += leng
-    return length
+    return sum(len(content["content"]) for content in text)
 
 def checklen(text):
     while (getlength(text) > 8000):
