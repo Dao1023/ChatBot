@@ -21,14 +21,13 @@
 
 ## 使用方法
 
-以下安装方式仅供参考
+### 开发环境
 
 git
 
 ```shell
-git clone https://github.com/Dao1023/ChatBot
+git clone https://github.com/Dao1023/ChatBot/tree/streamlit
 cd ChatBot
-git checkout streamlit
 ```
 
 Python（推荐 conda 环境）
@@ -48,4 +47,19 @@ pip install -r requirements.txt
 
 ```shell
 streamlit run main.py
+```
+### 生产环境
+
+git
+
+```shell
+git clone https://github.com/Dao1023/ChatBot/tree/streamlit
+cd ChatBot
+```
+
+docker
+
+```shell
+docker build -t chatbot .
+docker run -p 80:8501 chatbot
 ```
